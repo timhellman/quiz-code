@@ -19,6 +19,7 @@ var quiz = document.querySelector("#quiz");
 var quizBtn = document.querySelector("#quiz_start");
 var result = document.querySelector("#answer-results");
 console.log(quizBtn)
+//var highscore = localStorage.getitem("highscore")
 var questions = [
     {
         question: "In what state does a person need a permit in order to feed garbage to a pig?",
@@ -51,6 +52,8 @@ var questions = [
 function submitFinalScore(){
     var initials = document.getElementById("scoreInput").value;
     //submit the initials and the score to localStorage;
+      localStorage.setitem()  
+    
     //localStorage.setItem to save, localStorage.getItem to retrieve
     //localStorage.setItem("highscore")
 }
