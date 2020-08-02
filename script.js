@@ -13,7 +13,7 @@
 /////////that answer stored in local storage;
 /////////when an answer is clicked on - that is an if statement
 /////for loop for the questions and answers
-
+var choicesElement = document.querySelector("#choices");
 var quiz = document.querySelector("#quiz");
 var quizBtn = document.querySelector("#quiz_start");
 console.log(quizBtn)
@@ -45,7 +45,7 @@ var questions = [
         correctAnswer: 'Michigan',
     },
 ]
-var quizStart = document.querySelector("#quiz_start")
+
 var userChoice
 var currentQuestion = 0
 
@@ -59,10 +59,10 @@ function generateQuestions() {
     quiz.appendChild(h2);
 
     for (var i = 0; i < questions[currentQuestion].answers.length; i++) {
-        var buttons = document.createElement("button")
-        buttons.textContent = questions[currentQuestion].answers[i];
+        var buttons = document.createElement("button"); //<button></button>
+        buttons.textContent = questions[currentQuestion].answers[i];//<button></button>
         buttons.addEventListener("click", checkAnswer)
-        quizQuestions.appendChild(buttons)
+        choicesElement.appendChild(buttons)
     }
 }
 function checkAnswer() {
@@ -77,7 +77,7 @@ function checkAnswer() {
     else {
         var wrong = document.createElement("h2")
         alert = "WRONG!";
-        displayAnswer.appendChild(wrong);
+        
     }
     currentQuestion++;
     generateQuestions()
