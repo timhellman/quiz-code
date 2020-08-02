@@ -14,7 +14,9 @@
 /////////when an answer is clicked on - that is an if statement
 /////for loop for the questions and answers
 
-var quiz = document.querySelector("#quiz")
+var quiz = document.querySelector("#quiz");
+var quizBtn = document.querySelector("#quiz_start");
+console.log(quizBtn)
 var questions = [
     {
         question: "In what state does a person need a permit in order to feed garbage to a pig?",
@@ -23,13 +25,13 @@ var questions = [
     },
     {
         question: "A frog that dies during a frog-jumping contest cannot be eaten and must be destroyed ASAP in which state?",
-        answers: ['California','Colorado', 'Washington', 'West Virginia'],
+        answers: ['California', 'Colorado', 'Washington', 'West Virginia'],
         correctAnswer: 'California',
     },
-    
-    {   
+
+    {
         question: "In what state is cannibalism strictly prohibited and punishable by up to 14 years in prison?",
-        answers: ['Montana', 'Nebraska','Delaware', 'Idaho'],
+        answers: ['Montana', 'Nebraska', 'Delaware', 'Idaho'],
         correctAnswer: 'Idaho',
     },
     {
@@ -44,7 +46,7 @@ var questions = [
     },
 ]
 var quizStart = document.querySelector("#quiz_start")
-var userChoice 
+var userChoice
 var currentQuestion = 0
 
 //onclickevent that starts retrieving questions and displaying/starting the timer into id "quiz"
@@ -61,13 +63,12 @@ function generateQuestions() {
         buttons.textContent = questions[currentQuestion].answers[i];
         buttons.addEventListener("click", checkAnswer)
         quizQuestions.appendChild(buttons)
-        }
+    }
 }
-function checkAnswer(){
+function checkAnswer() {
     if (this.textContent === questions[currentQuestion].correct) {
         var correct = document.createElement("h2")
         alert = "CORRECT!";
-        displayAnswer.appendChild(correct);
         // console.log(correct)
         //select the element with quizContent id
         //append correct to that element
@@ -81,9 +82,8 @@ function checkAnswer(){
     currentQuestion++;
     generateQuestions()
 }
-document.getElementById("quiz_start").addEventListener("click", start);
 
-
+quizBtn.addEventListener("click", generateQuestions);
 
 
 var timeLeft = 45;
