@@ -13,9 +13,11 @@
 /////////that answer stored in local storage;
 /////////when an answer is clicked on - that is an if statement
 /////for loop for the questions and answers
+var answerResults = document.querySelector("#answer-results");
 var choicesElement = document.querySelector("#choices");
 var quiz = document.querySelector("#quiz");
 var quizBtn = document.querySelector("#quiz_start");
+var result = document.querySelector("#answer-results");
 console.log(quizBtn)
 var questions = [
     {
@@ -46,16 +48,48 @@ var questions = [
     },
 ]
 
+function submitFinalScore(){
+    var initials = document.getElementById("scoreInput").value;
+    //submit the initials and the score to localStorage;
+    //localStorage.setItem to save, localStorage.getItem to retrieve
+    //localStorage.setItem("highscore")
+}
+
+function doSomething() {
+    clearTimeout(timerId);
+    scoreSpan.textContent = `${score}/${questions.length}`
+    var initialsScore = document.createElement("input");
+    initialsScore.setAttribute("id", "scoreInput")
+    answerResults.appendChild(initialsScore)
+    var buttons = document.createElement("button");
+    buttons.textContent = "Submit";
+    buttons.addEventListener("click", submitFinalScore)
+    answerResults.appendChild(buttons)
+}
+var scoreSpan = document.querySelector("#score")
 var userChoice
 var currentQuestion = 0
-
+var timerId;
+//doSomething will be a function to display final score
 //onclickevent that starts retrieving questions and displaying/starting the timer into id "quiz"
-
-
+function countdown() {
+    if (timeLeft == -1) {
+        
+        doSomething();
+    } else {
+        timer.innerHTML = timeLeft + 'seconds remaining';
+        timeLeft--;
+    }
+}
+var score = 0
 function generateQuestions() {
     quiz.innerHTML = "";
+    result.innerHTML = "";
     choicesElement.innerHTML = "";
-    var h2 = document.createElement("h2");
+    if (currentQuestion >= questions.length){
+        doSomething()
+    }else{
+       var h2 = document.createElement("h2");
     h2.textContent = questions[currentQuestion].question;
     quiz.appendChild(h2);
 
@@ -64,42 +98,41 @@ function generateQuestions() {
         buttons.textContent = questions[currentQuestion].answers[i];
         buttons.addEventListener("click", checkAnswer)
         choicesElement.appendChild(buttons)
+    } 
     }
+    
+    
 }
 function checkAnswer() {
-    if (this.textContent === questions[currentQuestion].correct) {
-        var correct = document.createElement("h2")
-        alert = "CORRECT!";
+    if (this.textContent === questions[currentQuestion].correctAnswer) {
+        result.textContent = ("correct!")
         // console.log(correct)
         //select the element with quizContent id
         //append correct to that element
         score++;
+
     }
     else {
-        var wrong = document.createElement("h2")
-        alert = "WRONG!";
+        result.textContent = ("incorrect!")
         
     }
+
     currentQuestion++;
-    generateQuestions()
+    setTimeout(generateQuestions, 500)
 }
 
-quizBtn.addEventListener("click", generateQuestions);
+
+quizBtn.addEventListener("click", function(){
+    timerId = setInterval(countdown, 1000);
+    generateQuestions();
+});
 
 
 var timeLeft = 45;
 var timer = document.getElementById('timer');
-var timerId = setInterval(countdown, 1000);
 
-function countdown() {
-    if (timeLeft == -1) {
-        clearTimeout(timerId);
-        doSomething();
-    } else {
-        timer.innerHTML = timeLeft + 'seconds remaining';
-        timeLeft--;
-    }
-}
+
+
 
 
 
