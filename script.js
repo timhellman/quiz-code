@@ -54,13 +54,14 @@ var currentQuestion = 0
 
 function generateQuestions() {
     quiz.innerHTML = "";
+    choicesElement.innerHTML = "";
     var h2 = document.createElement("h2");
     h2.textContent = questions[currentQuestion].question;
     quiz.appendChild(h2);
 
     for (var i = 0; i < questions[currentQuestion].answers.length; i++) {
-        var buttons = document.createElement("button"); //<button></button>
-        buttons.textContent = questions[currentQuestion].answers[i];//<button></button>
+        var buttons = document.createElement("button"); 
+        buttons.textContent = questions[currentQuestion].answers[i];
         buttons.addEventListener("click", checkAnswer)
         choicesElement.appendChild(buttons)
     }
