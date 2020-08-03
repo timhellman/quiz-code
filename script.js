@@ -47,19 +47,29 @@ var questions = [
         correctAnswer: 'Michigan',
     },
 ]
-
+var highScoresArray = []
 function submitFinalScore(){
     var initials = document.getElementById("scoreInput").value;
     const highScore = {
         initials: initials,
         score: score
       };
-    localStorage.setItem("highscore",JSON.stringify(highScore));
+      
+      console.log(highScoresArray)
+      if(JSON.parse(localStorage.getItem("highscore")) !== null) {
+        highScoresArray = JSON.parse(localStorage.getItem("highscore"))
+        highScoresArray.push(highScore)
+      }
+       else {
+        highScoresArray.push(highScore)
+      }
     
-    console.log(highScore)
+      localStorage.setItem("highscore",JSON.stringify(highScoresArray));
+    
+     console.log(highScore)
 }
 
-//var highScore = JSON.parse(localStorage.getItem("highscore"))
+
 
 function doSomething() {
     clearTimeout(timerId);
