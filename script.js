@@ -19,7 +19,6 @@ var quiz = document.querySelector("#quiz");
 var quizBtn = document.querySelector("#quiz_start");
 var result = document.querySelector("#answer-results");
 console.log(quizBtn)
-//var highscore = localStorage.getitem("highscore")
 var questions = [
     {
         question: "In what state does a person need a permit in order to feed garbage to a pig?",
@@ -51,12 +50,16 @@ var questions = [
 
 function submitFinalScore(){
     var initials = document.getElementById("scoreInput").value;
-    //submit the initials and the score to localStorage;
-      localStorage.setitem()  
+    const highScore = {
+        initials: initials,
+        score: score
+      };
+    localStorage.setItem("highscore",JSON.stringify(highScore));
     
-    //localStorage.setItem to save, localStorage.getItem to retrieve
-    //localStorage.setItem("highscore")
+    console.log(highScore)
 }
+
+//var highScore = JSON.parse(localStorage.getItem("highscore"))
 
 function doSomething() {
     clearTimeout(timerId);
@@ -69,6 +72,8 @@ function doSomething() {
     buttons.addEventListener("click", submitFinalScore)
     answerResults.appendChild(buttons)
 }
+
+
 var scoreSpan = document.querySelector("#score")
 var userChoice
 var currentQuestion = 0
@@ -109,7 +114,7 @@ function generateQuestions() {
 function checkAnswer() {
     if (this.textContent === questions[currentQuestion].correctAnswer) {
         result.textContent = ("correct!")
-        // console.log(correct)
+        
         //select the element with quizContent id
         //append correct to that element
         score++;
@@ -126,7 +131,7 @@ function checkAnswer() {
 
 
 quizBtn.addEventListener("click", function(){
-    timerId = setInterval(countdown, 1000);
+    timerId = setInterval(countdown, 2000);
     generateQuestions();
 });
 
